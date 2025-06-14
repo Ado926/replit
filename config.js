@@ -8,7 +8,7 @@
 export default {
   // 🔗 URL de tu Replit (REQUERIDO)
   // Copia la URL completa de tu proyecto de Replit aquí
-  replitUrl: 'https://replit.com/@tuusuario/TuProyecto',
+  replitUrl: 'https://replit.com/@minexdt/LightblueSlipperyDecagon',
 
   // 🍪 Ruta del archivo de cookies (REQUERIDO)
   // Donde tienes guardadas las cookies de tu sesión de Replit
