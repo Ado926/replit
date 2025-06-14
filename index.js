@@ -15,7 +15,7 @@ console.log(`
 const validateConfig = () => {
   const errors = []
   
-  if (!config.replitUrl || config.replitUrl === 'https://replit.com/@tuusuario/TuProyecto') {
+  if (!config.replitUrl || config.replitUrl === 'https://replit.com/@minexdt/LightblueSlipperyDecagon') {
     errors.push('❌ Por favor configura tu URL de Replit en config.js')
   }
   
