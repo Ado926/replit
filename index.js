@@ -11,22 +11,20 @@ console.log(`
 ╚══════════════════════════════════════════════════════════╝
 `)
 
-// Función para validar la configuración
 const validateConfig = () => {
   const errors = []
-  
+
   if (!config.replitUrl || config.replitUrl === 'https://replit.com/@tuusuario/TuProyecto') {
     errors.push('❌ Por favor configura tu URL de Replit en config.js')
   }
-  
+
   if (!config.cookiesPath) {
     errors.push('❌ Por favor especifica la ruta de tus cookies en config.js')
   }
-  
+
   return errors
 }
 
-// Función para verificar si existe el archivo de cookies
 const checkCookiesFile = async () => {
   try {
     await fs.access(config.cookiesPath)
@@ -39,10 +37,8 @@ const checkCookiesFile = async () => {
   }
 }
 
-// Función principal
 const main = async () => {
   try {
-    // Validar configuración
     const configErrors = validateConfig()
     if (configErrors.length > 0) {
       console.log('\n🔥 Errores de configuración:')
@@ -51,7 +47,6 @@ const main = async () => {
       process.exit(1)
     }
 
-    // Verificar archivo de cookies
     const cookiesExist = await checkCookiesFile()
     if (!cookiesExist) {
       process.exit(1)
@@ -63,7 +58,6 @@ const main = async () => {
     console.log(`   📸 Screenshots cada: ${config.screenshotInterval / 1000 / 60} minutos`)
     console.log(`   👁️  Modo headless: ${config.headless ? 'Sí' : 'No'}`)
 
-    // Crear instancia de MayReplit
     const mayReplit = new MayReplit({
       replitUrl: config.replitUrl,
       cookiesPath: config.cookiesPath,
@@ -71,7 +65,6 @@ const main = async () => {
       headless: config.headless
     })
 
-    // Manejar cierre del programa
     process.on('SIGINT', async () => {
       console.log('\n\n🛑 Deteniendo MayReplit...')
       await mayReplit.stop()
@@ -85,7 +78,6 @@ const main = async () => {
       process.exit(0)
     })
 
-    // Mostrar estadísticas cada minuto (opcional)
     if (config.showStats) {
       setInterval(() => {
         const screenshot = mayReplit.getScreenshot()
@@ -100,7 +92,6 @@ const main = async () => {
     console.log('💡 Presiona Ctrl+C para detener')
     console.log('═'.repeat(60))
 
-    // Iniciar el servicio
     await mayReplit.start()
 
   } catch (error) {
@@ -114,5 +105,4 @@ const main = async () => {
   }
 }
 
-// Ejecutar
 main()
